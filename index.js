@@ -10,6 +10,9 @@ app.get('/', (request, response) => {
     return response.send('Hola Mundo');
 })
 
+const customersRouter = require('./api/customers/customers.router');
+app.use('/customers'   , customersRouter)
+
 
 app.listen(5000, (err) => {
     if (err) return console.log('Hay una error ! ', err);
