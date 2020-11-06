@@ -1,4 +1,4 @@
-const customerModel = require('./customers.model')
+const customerModel = require("./customers.model");
 
 /**
  * GET     /customers              ->  getAll
@@ -11,28 +11,48 @@ const customerModel = require('./customers.model')
 
 module.exports.getAll = getAll;
 module.exports.getOneById = getOneById;
-module.exports.createOne = createOne;
+module.exports.createOne = create;
 module.exports.putOne = putOne;
-module.exports.patchOne = patchOne;
-module.exports.removeOne = removeOne;
+module.exports.removeOne = remove;
 
-function getAll(req, res) {
+function getAll(req,res) {
     return customerModel.find()
-        .then(customers => { return res.json(customers) })
-        .catch(error => res.status(500).json(error))
+        .then((customers) => res.json(customers))
+        .catch((e) => res.status(500).json(e));
 }
-function getOneById ( req, res ) {
-    return res.send('Todo salió bien, me hicise un getOneById')
+
+function getOneById(req, res) {
+  const id = req.params.id;
+    return customerModel
+        .findById(id)
+        .then((customer) => res.json(customer))
+        .catch((e) => res.status(500).json(e));
 }
-function createOne ( req, res ) {
-    return res.send('Todo salió bien, me hicise un createOne')
+
+
+function create(req, res) {
+  return customerModel
+    .create(req.body)
+    .then((u) => res.json(u))
+    .catch((e) => res.status(500).json(e));
 }
-function putOne ( req, res ) {
-    return res.send('Todo salió bien, me hicise un putOne')
+
+
+async function putOne(req, res) {
+  try {
+    const id = req.params.id;
+    const edited = await customerModel.findOneById(id).updateOne(req.body);
+    return res.json(edited);
+  } catch (e) {
+    return res.status(500).json(e);
+  }
 }
-function patchOne ( req, res ) {
-    return res.send('Todo salió bien, me hicise un patchOne')
-}
-function removeOne ( req, res ) {
-    return res.send('Todo salió bien, me hicise un removeOne')
+
+
+function remove(req, res) {
+  const id = req.params.id ;
+    return customerModel
+    .findByIdAndRemove(id)
+    .then((u) => res.json(u))
+    .catch((e) => res.status(500).json(e));
 }
