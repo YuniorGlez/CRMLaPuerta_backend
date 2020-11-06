@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config()
 const app = express();
+
+const mongoose = require('mongoose')
+mongoose.connect(`mongodb+srv://admin:${process.env.MONGODB_ADMIN_PASSWORD}@cluster0.ek3po.mongodb.net/CRMLaPuerta?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
  
 app.use(cors({ origin : [  'osama.com' , 'localhost:4200'  ]}));
 

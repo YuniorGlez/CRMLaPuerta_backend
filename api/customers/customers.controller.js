@@ -1,3 +1,5 @@
+const customerModel = require('./customers.model')
+
 /**
  * GET     /customers              ->  getAll
  * GET     /customers/:id          ->  getOneById
@@ -14,8 +16,10 @@ module.exports.putOne = putOne;
 module.exports.patchOne = patchOne;
 module.exports.removeOne = removeOne;
 
-function getAll ( req, res ) {
-    return res.send('Todo salió bien, me hicise un getAll')
+function getAll(req, res) {
+    return customerModel.find()
+        .then(customers => { return res.json(customers) })
+        .catch(error => res.status(500).json(error))
 }
 function getOneById ( req, res ) {
     return res.send('Todo salió bien, me hicise un getOneById')
@@ -32,4 +36,3 @@ function patchOne ( req, res ) {
 function removeOne ( req, res ) {
     return res.send('Todo salió bien, me hicise un removeOne')
 }
-
