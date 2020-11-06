@@ -1,0 +1,19 @@
+{
+  "name": "crmlapuerta_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuniorGlez/CRMLaPuerta_backend.git"
+  },
+  "author": "EOI Fullstack Edición 2020",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YuniorGlez/CRMLaPuerta_backend/issues"
+  },
+  "homepage": "https://github.com/YuniorGlez/CRMLaPuerta_backend#readme"
+}
