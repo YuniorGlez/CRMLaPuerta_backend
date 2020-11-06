@@ -17,6 +17,9 @@ app.get('/', (request, response) => {
 const customersRouter = require('./api/customers/customers.router');
 app.use('/customers'   , customersRouter)
 
+const projectsRouter = require('./api/projects/projects.router');
+app.use('/projects'   , projectsRouter)
+
 
 app.listen(5000, (err) => {
     if (err) return console.log('Hay una error ! ', err);
