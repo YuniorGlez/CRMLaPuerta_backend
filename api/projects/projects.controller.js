@@ -15,19 +15,34 @@ module.exports.createOne = create;
 module.exports.putOne = putOne;
 module.exports.removeOne = remove;
 
-function getAll(req,res) {
-  return projectModel.find()
+function getAll(req, res) {
+  if (req.query.populate) { 
+      return projectModel.find()
       .populate('customer')
-        .then((projects) => res.json(projects))
-        .catch((e) => res.status(500).json(e));
+      .then((projects) => res.json(projects))
+      .catch((e) => res.status(500).json(e));
+    } else {
+      return projectModel.find()
+      .then((projects) => res.json(projects))
+      .catch((e) => res.status(500).json(e));
+  }
 }
 
 function getOneById(req, res) {
   const id = req.params.id;
+  if (req.query.populate) {  
     return projectModel
+      .findById(id)
+      .populate('customer')
+      .then((customer) => res.json(customer))
+      .catch((e) => res.status(500).json(e));
+    } else {
+      return projectModel
         .findById(id)
         .then((customer) => res.json(customer))
         .catch((e) => res.status(500).json(e));
+    
+  }
 }
 
 
